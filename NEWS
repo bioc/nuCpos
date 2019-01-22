@@ -11,3 +11,14 @@ New package for prediction of nucleosome positioning.
 ver. 1.1.1/2018-11-30
 The new biocViews tag "ImmunoOncology" was added
 to the biocViews field of the DESCRIPTION file.
+
+ver. 1.1.3/2019-01-22
+Parameters (linker length distribution for budding
+and fission yeasts) in sysdata.rda were replaced.
+  nature11142_s2.linker.147.prob_SMA
+  sd01.linker.147.prob_SMA
+
+The above replacement slightly affect the 
+calculation results of predNuCpos and mutNuCpos.
+HBA and localHBA will not be affected.
+

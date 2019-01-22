@@ -2,7 +2,7 @@
 \alias{localHBA}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-    R function for calculating the histone binding score 
+    R function for calculating the local histone binding score 
     of a given 147-bp sequence.
 }
 \description{
