@@ -105,6 +105,7 @@ localHBA <- function(inseq, species = "mm", silent = FALSE){
             TfreqN4SJ = TfreqN4SJ, TfreqN4SK = TfreqN4SK, 
             TfreqN4SL = TfreqN4SL, 
             TfreqN4SM = TfreqN4SM,
+            # TtranN4 = TtranN4, PACKAGE = "nuCpos")[2:14]
             TtranN4 = TtranN4, PACKAGE = "nuCpos")[2:14]
 
     # N を含んでいるときはすべてを NA にする。
@@ -112,7 +113,7 @@ localHBA <- function(inseq, species = "mm", silent = FALSE){
         outlist[seq_len(13)] <- as.numeric(NA)
     }
     out <- unlist(outlist)
-    out <- out[c(1,8,2,9,3,10,4,11,5,12,6,13,7)]
+    # out <- out[c(1,8,2,9,3,10,4,11,5,12,6,13,7)]
     names(out) <- c("lHBA_A", "lHBA_B", "lHBA_C", "lHBA_D", 
             "lHBA_E", "lHBA_F", "lHBA_G", 
             "lHBA_H", "lHBA_I", "lHBA_J", "lHBA_K", "lHBA_L", "lHBA_M")

@@ -22,3 +22,9 @@ The above replacement slightly affect the
 calculation results of predNuCpos and mutNuCpos.
 HBA and localHBA will not be affected.
 
+ver. 1.1.5/2019-02-04
+Parameters for localHBA in sysdata.rda were renamed.
+Fortran code for localHBA was replaced to fit 
+the above change.
+The output of localHBA will not be affected.
+
