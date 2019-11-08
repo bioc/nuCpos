@@ -1,9 +1,9 @@
-subroutine HBA_3(inseq, logasc, &
+subroutine HBA_3(inseq_num, logasc, &
                         &freqL1, tranL1, TtranL2, TtranL3, TtranL4, TfreqN4, TtranN4)
 
   implicit none
   character(147)   inseq
-  integer     c(147), w(147), i, j, k, l, n, t, z
+  integer    c(147), w(147), i, j, k, l, n, t, z, inseq_num(147)
   real(8)    asc
   real(8)    logasc
   real(8)    TtranL2(16,4),TtranL3(64,4),TtranL4(256,4)
@@ -12,6 +12,10 @@ subroutine HBA_3(inseq, logasc, &
   real(8)    freqN4(4,4,4,4)
   real(8)    tranN4(5:147,4,4,4,4,4),freqL4(4,4,4,4)
 
+  inseq=char(inseq_num(1))
+  do i=2,147;
+     inseq = inseq(1:(i-1)) // char(inseq_num(i))
+  end do
 
   do i=1,147
     if(inseq(i:i)=='A'.or.inseq(i:i)=='a') then

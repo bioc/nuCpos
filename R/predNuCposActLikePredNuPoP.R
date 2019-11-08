@@ -1,7 +1,7 @@
 predNuCposActLikePredNuPoP <- function (file, species = "mm", smoothHBA = FALSE,
         std = FALSE) {
-    file = as.character(file)
-    n = nchar(file)
+    file <- as.character(file)
+    n <- nchar(file)
     if(std == TRUE) STD <- 1
     if(std == FALSE) STD <- 0
 
@@ -36,14 +36,15 @@ predNuCposActLikePredNuPoP <- function (file, species = "mm", smoothHBA = FALSE,
         Pd <- chem.mm9.LinkerDNA.prob_SMA
     }
 
+    file_name_num <- as.integer(charToRaw(file))
     if(smoothHBA == FALSE){
-        results = .Fortran("nuCpos_2", n, file, freqL, tranL, 
+        results = .Fortran("nuCpos_2", n, file_name_num, freqL, tranL, 
             tranL2, tranL3, tranL4, freqN4, tranN4, maxlen =  as.integer(500), 
             Pd, std = STD, ind = as.integer(0), PACKAGE = "nuCpos")
         ind = results$ind
     }
     if(smoothHBA == TRUE){
-        results = .Fortran("nuCpos_1", n, file, freqL, tranL, 
+        results = .Fortran("nuCpos_1", n, file_name_num, freqL, tranL, 
             tranL2, tranL3, tranL4, freqN4, tranN4, maxlen =  as.integer(500), 
             Pd, std = STD, ind = as.integer(0), PACKAGE = "nuCpos")
         ind = results$ind
@@ -59,6 +60,6 @@ predNuCposActLikePredNuPoP <- function (file, species = "mm", smoothHBA = FALSE,
     } else {
         wd <- getwd()
         filename <- paste(file, "_Prediction4.txt", sep = "")
-        message(filename, "was created in the working directory.")
+        message(filename, " was created in the working directory.")
     }
 }

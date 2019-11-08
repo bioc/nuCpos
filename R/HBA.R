@@ -51,8 +51,9 @@ HBA <- function(inseq, species = "mm", silent = FALSE){
         TfreqN4 <- chem.mm9.freqN4SA
         TtranN4 <- chem.mm9.tranN4_SMA
     }
+    inseq_num <- as.integer(charToRaw(inseq))
     outlist <- .Fortran("HBA_3", 
-            inseq = inseq,
+            inseq_num = inseq_num,
             logasc = numeric(length=1), freqL1 = freqL1, 
             tranL1 = tranL1, TtranL2 = TtranL2, TtranL3 = TtranL3, 
             TtranL4 = TtranL4, TfreqN4 = TfreqN4, 

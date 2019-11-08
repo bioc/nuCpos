@@ -1,4 +1,4 @@
-subroutine localHBA_3(inseq, logascSA, logascSB, logascSC, &
+subroutine localHBA_3(inseq_num, logascSA, logascSB, logascSC, &
 			&logascSD, logascSE, logascSF, logascSG, &
 			&logascSH, logascSI, logascSJ, &
 			&logascSK, logascSL, logascSM, &
@@ -10,7 +10,7 @@ subroutine localHBA_3(inseq, logascSA, logascSB, logascSC, &
 
   implicit none
   character(147)   inseq
-  integer     c(147), w(147), i, j, k, l, n
+  integer     c(147), w(147), i, j, k, l, n, inseq_num(147)
   real(8)    ascSA, ascSB, ascSC, ascSD, ascSE, ascSF, ascSG
   real(8)    ascSH, ascSI, ascSJ, ascSK, ascSL, ascSM
   real(8)    logascSA, logascSB, logascSC, logascSD
@@ -29,6 +29,10 @@ subroutine localHBA_3(inseq, logascSA, logascSB, logascSC, &
   real(8)    freqN4SK(4,4,4,4),freqN4SL(4,4,4,4),freqN4SM(4,4,4,4)
   real(8)    tranN4(5:147,4,4,4,4,4),freqL4(4,4,4,4)
 
+  inseq=char(inseq_num(1))
+  do i=2,147;
+     inseq = inseq(1:(i-1)) // char(inseq_num(i))
+  end do
 
   do i=1,147
     if(inseq(i:i)=='A'.or.inseq(i:i)=='a') then

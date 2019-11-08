@@ -59,8 +59,9 @@ predNuCposInternal <- function(inseq, species = "mm",
         Pd <- chem.mm9.LinkerDNA.prob_SMA
     }
 
+    inseq_num <- as.integer(charToRaw(inseq))
     if(smoothHBA == FALSE){
-        results = .Fortran("nuCpos2_2", inseq, inseqlen, freqL, tranL, 
+        results = .Fortran("nuCpos2_2", inseq_num, inseqlen, freqL, tranL, 
             tranL2, tranL3, tranL4, freqN4, tranN4, maxlen =  as.integer(500), 
             Pd, std = STD, 
             pstart = numeric(length=inseqlen),
@@ -70,7 +71,7 @@ predNuCposInternal <- function(inseq, species = "mm",
             PACKAGE = "nuCpos")[13:16]
     }
     if(smoothHBA == TRUE){
-        results = .Fortran("nuCpos2_1", inseq, inseqlen, freqL, tranL, 
+        results = .Fortran("nuCpos2_1", inseq_num, inseqlen, freqL, tranL, 
             tranL2, tranL3, tranL4, freqN4, tranN4, maxlen =  as.integer(500), 
             Pd, std = STD, 
             pstart = numeric(length=inseqlen),

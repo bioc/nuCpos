@@ -87,8 +87,9 @@ localHBA <- function(inseq, species = "mm", silent = FALSE){
         TfreqN4SM <- chem.mm9.freqN4SM
         TtranN4 <- chem.mm9.tranN4_SMA
     }
+    inseq_num <- as.integer(charToRaw(inseq))
     outlist <- .Fortran("localHBA_3", 
-            inseq = inseq, logascSA = numeric(length=1), 
+            inseq_num = inseq_num, logascSA = numeric(length=1), 
             logascSB = numeric(length=1), logascSC = numeric(length=1),
             logascSD = numeric(length=1), logascSE = numeric(length=1),
             logascSF = numeric(length=1), logascSG = numeric(length=1),

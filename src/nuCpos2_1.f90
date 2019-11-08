@@ -1,11 +1,11 @@
 
-subroutine nuCpos2_1(inseq,seqlen,freqL1,tranL1,TtranL2,TtranL3,TtranL4,TfreqN4,TtranN4,mlL,Pd&
-  &,std,pstart,nucoccup,viterbi,affinity)
+subroutine nuCpos2_1(inseq_num,seqlen,freqL1,tranL1,TtranL2,TtranL3,TtranL4,&
+  &TfreqN4,TtranN4,mlL,Pd,std,pstart,nucoccup,viterbi,affinity)
 
   implicit none
   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-  integer   t,d,i,j,k,l,m,n,z,mlL,nvt,std,seqlen
+  integer   t,d,i,j,k,l,m,n,z,mlL,nvt,std,seqlen,inseq_num(seqlen)
   real*8    tempN,tempL,temp,tp,Pd(mlL)
   real*8    TtranL2(16,4),TtranL3(64,4),TtranL4(256,4),TfreqN4(64,4),TtranN4((147-4)*256,4)
   real*8    freqL1(4),tranL1(4,4),tranL2(4,4,4),tranL3(4,4,4,4),tranL4(4,4,4,4,4)
@@ -18,6 +18,10 @@ subroutine nuCpos2_1(inseq,seqlen,freqL1,tranL1,TtranL2,TtranL3,TtranL4,TfreqN4,
   ! real(8) pstart(seqlen),nucoccup(seqlen),viterbi(seqlen),affinity(seqlen)
   double precision,dimension(seqlen):: pstart,nucoccup,viterbi,affinity
   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  inseq=char(inseq_num(1))
+  do i=2,seqlen;
+     inseq = inseq(1:(i-1)) // char(inseq_num(i))
+  end do
 
   do i=1,4; do j=1,4; tranL2(i,j,:)=TtranL2((i-1)*4+j,:)
   do k=1,4; tranL3(i,j,k,:)=TtranL3((i-1)*16+(j-1)*4+k,:)

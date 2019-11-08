@@ -105,8 +105,9 @@ mutNuCpos <- function(wtseq, site = 1, ins = "", del = 0, species = "mm",
     }
 
     ## wtseq
+    wtseqx5_num <- as.integer(charToRaw(wtseqx5))
     if(smoothHBA == FALSE){
-        results = .Fortran("nuCpos2_2", wtseqx5, wtlen, freqL, tranL, 
+        results = .Fortran("nuCpos2_2", wtseqx5_num, wtlen, freqL, tranL, 
             tranL2, tranL3, tranL4, freqN4, tranN4, maxlen =  as.integer(500), 
             Pd, std = STD, 
             pstart = numeric(length=wtlen),
@@ -116,7 +117,7 @@ mutNuCpos <- function(wtseq, site = 1, ins = "", del = 0, species = "mm",
             PACKAGE = "nuCpos")[13:16]
     }
     if(smoothHBA == TRUE){
-        results = .Fortran("nuCpos2_1", wtseqx5, wtlen, freqL, tranL, 
+        results = .Fortran("nuCpos2_1", wtseqx5_num, wtlen, freqL, tranL, 
             tranL2, tranL3, tranL4, freqN4, tranN4, maxlen =  as.integer(500), 
             Pd, std = STD, 
             pstart = numeric(length=wtlen),
@@ -130,8 +131,9 @@ mutNuCpos <- function(wtseq, site = 1, ins = "", del = 0, species = "mm",
     wt.results$affinity[(wtlen-72):wtlen] <- as.numeric(NA)
 
     ## mtseq
+    mtseqx5_num <- as.integer(charToRaw(mtseqx5))
     if(smoothHBA == FALSE){
-        results = .Fortran("nuCpos2_2", mtseqx5, mtlen, freqL, tranL, 
+        results = .Fortran("nuCpos2_2", mtseqx5_num, mtlen, freqL, tranL, 
             tranL2, tranL3, tranL4, freqN4, tranN4, maxlen =  as.integer(500), 
             Pd, std = STD, 
             pstart = numeric(length=mtlen),
@@ -141,7 +143,7 @@ mutNuCpos <- function(wtseq, site = 1, ins = "", del = 0, species = "mm",
             PACKAGE = "nuCpos")[13:16]
     }
     if(smoothHBA == TRUE){
-        results = .Fortran("nuCpos2_1", mtseqx5, mtlen, freqL, tranL, 
+        results = .Fortran("nuCpos2_1", mtseqx5_num, mtlen, freqL, tranL, 
             tranL2, tranL3, tranL4, freqN4, tranN4, maxlen =  as.integer(500), 
             Pd, std = STD, 
             pstart = numeric(length=mtlen),

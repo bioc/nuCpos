@@ -1,11 +1,13 @@
 
-subroutine nuCpos_1(lfn,filename,freqL1,tranL1,TtranL2,TtranL3,TtranL4,TfreqN4,TtranN4,mlL,Pd,std,ind)
+subroutine nuCpos_1(lfn,file_name_num,freqL1,tranL1,TtranL2,&
+                        &TtranL3,TtranL4,TfreqN4,TtranN4,mlL,Pd,std,ind)
 
   implicit none
   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   integer   t,d,i,j,k,l,m,n,z,mlL,lfn,nvt,ind,lfn1,std
-  integer   zt,np,zp(100),q,st(100),ed(100),ext,rts(100),rte(100)
+  integer   zt,np,zp(100),q,st(100),ed(100),ext,rts(100),rte(100),&
+                        &file_name_num(lfn)
   integer   ztt,nsec,x,base; integer,allocatable:: nrcv(:),nbrk(:)
   real*8    tempN,tempL,temp,tp,Pd(mlL),tmp(mlL)
   real*8    TtranL2(16,4),TtranL3(64,4),TtranL4(256,4),TfreqN4(64,4),TtranN4((147-4)*256,4)
@@ -20,6 +22,11 @@ subroutine nuCpos_1(lfn,filename,freqL1,tranL1,TtranL2,TtranL3,TtranL4,TfreqN4,T
   integer,allocatable:: change(:),Nst(:); real*8,allocatable:: ppEndN(:),ppN(:),asc(:),aas(:)
   real*8,allocatable:: hatFN(:),hatFL(:),r(:),hatAN(:),hatAL(:),ra(:),hatBN(:),hatBL(:),rb(:)
   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  filename=char(file_name_num(1))
+  do i=2,lfn;
+     filename = filename(1:(i-1)) // char(file_name_num(i))
+  end do
+  !print *, filename
 
   do i=1,4; do j=1,4; tranL2(i,j,:)=TtranL2((i-1)*4+j,:)
   do k=1,4; tranL3(i,j,k,:)=TtranL3((i-1)*16+(j-1)*4+k,:)
