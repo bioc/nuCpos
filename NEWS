@@ -29,9 +29,9 @@ the above change.
 The output of localHBA will not be affected.
 
 **************************************************
-*              1.6 SERIES NEWS                   *
+*              1.5 SERIES NEWS                   *
 **************************************************
-ver. 1.6.0/2019-11-08
+ver. 1.5.1/2019-11-08
 predNuCposActLikePredNuPoP.R, nuCpos_1.f90, 
 nuCpos_2.f90, HBA.R, HBA_3.f90, localHBA.R, 
 localHBA_3.f90, predNuCposInternal.R, 

@@ -31,7 +31,7 @@
 \tabular{ll}{
     Package: \tab nuCpos\cr
     Type: \tab Package\cr
-    Version: \tab 1.6.0\cr
+    Version: \tab 1.5.1\cr
     Date: \tab 2019-11-08\cr
     License: \tab  GPL-2\cr
 }
