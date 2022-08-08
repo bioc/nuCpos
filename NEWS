@@ -42,12 +42,12 @@ LICENSE were sited in DESCRIPTION.
 
 * Note (2022-08-03)
 * The above statements on ver. 1.5.1 was incorrect.
-* They were on ver. 1.14.0.
+* They were on ver. 1.15.0.
 
 **************************************************
-*              1.15 SERIES NEWS                   *
+*              1.16 SERIES NEWS                   *
 **************************************************
-ver. 1.15.0/2022-08-08
+ver. 1.16.0/2022-08-08
 Acknowledging the update of NuPoP, the abstract 
 and manual of nuCpos were modified.
 mutNuCpos was removed.
