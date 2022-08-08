@@ -3,7 +3,7 @@ Title: An R package for prediction of nucleosome positions
 Authors@R: c(person("Hiroaki", "Kato", role=c("aut", "cre"), 
 			email="hkato@med.shimane-u.ac.jp", comment=c(ORCID="0000-0001-9591-1875")), 
 		person("Takeshi", "Urano", role=c("ctb")))
-Version: 1.14.1
+Version: 1.15.0
 Description: nuCpos, a derivative of NuPoP, is an R package for prediction of nucleosome positions. In nuCpos, a duration hidden Markov model is trained with a chemical map of nucleosomes either from budding yeast, fission yeast, or mouse embryonic stem cells. nuCpos outputs the Viterbi (most probable) path of nucleosome-linker states, predicted nucleosome occupancy scores and histone binding affinity (HBA) scores as NuPoP does. nuCpos can also calculate local and whole nucleosomal HBA scores for a given 147-bp sequence. Note: This package was designed to demonstrate the use of chemical maps in prediction. As the parental package NuPoP now provide chemical-map-based prediction, users are strongly encouraged to use it for dHMM-based prediction.
 Author: Hiroaki Kato, Takeshi Urano
 License: GPL-2
