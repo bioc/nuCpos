@@ -40,4 +40,18 @@ were revised not to pass character string to
 Fortran subroutines.
 LICENSE were sited in DESCRIPTION.
 
+* Note (2022-08-03)
+* The above statements on ver. 1.5.1 was incorrect.
+* They were on ver. 1.14.0.
+
+**************************************************
+*              1.14 SERIES NEWS                   *
+**************************************************
+ver. 1.14.1/2022-08-08
+Acknowledging the update of NuPoP, the abstract 
+and manual of nuCpos were modified.
+mutNuCpos was removed.
+
+
+
 

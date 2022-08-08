@@ -38,16 +38,16 @@ predNuCposActLikePredNuPoP <- function (file, species = "mm", smoothHBA = FALSE,
 
     file_name_num <- as.integer(charToRaw(file))
     if(smoothHBA == FALSE){
-        results = .Fortran("nuCpos_2", n, file_name_num, freqL, tranL, 
+        results <- .Fortran("nuCpos_2", n, file_name_num, freqL, tranL, 
             tranL2, tranL3, tranL4, freqN4, tranN4, maxlen =  as.integer(500), 
             Pd, std = STD, ind = as.integer(0), PACKAGE = "nuCpos")
-        ind = results$ind
+        ind <- results$ind
     }
     if(smoothHBA == TRUE){
-        results = .Fortran("nuCpos_1", n, file_name_num, freqL, tranL, 
+        results <- .Fortran("nuCpos_1", n, file_name_num, freqL, tranL, 
             tranL2, tranL3, tranL4, freqN4, tranN4, maxlen =  as.integer(500), 
             Pd, std = STD, ind = as.integer(0), PACKAGE = "nuCpos")
-        ind = results$ind
+        ind <- results$ind
     }
 
     if(ind==1){

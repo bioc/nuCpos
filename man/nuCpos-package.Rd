@@ -18,21 +18,21 @@
     occupancy scores and histone binding affinity (HBA) 
     scores as \pkg{NuPoP} does. \pkg{nuCpos} can also 
     calculate local and whole nucleosomal HBA scores for 
-    a given 147-bp sequence. Furthermore, effect of 
-    genetic alterations on nucleosome occupancy can be 
-    predicted with this package. The parental package 
-    \pkg{NuPoP}, which is based on an MNase-seq-based map 
-    of budding yeast nucleosomes, was developed by 
-    Ji-Ping Wang and Liqun Xi, licensed under GPL-2. 
-    Please refer to Xi et al. (2010) and Wang et al. (2008) 
-    for technical details of \pkg{NuPoP}. 
+    a given 147-bp sequence. Note: This package was 
+    designed to demonstrate the use of chemical maps in 
+    prediction. As the parental package \pkg{NuPoP} now 
+    provide chemical-map-based prediction, users are 
+    strongly encouraged to use it for dHMM-based 
+    prediction. Please refer to Xi et al. (2010) and 
+    Wang et al. (2008) for technical details of 
+    \pkg{NuPoP}. 
 }
 \details{
 \tabular{ll}{
     Package: \tab nuCpos\cr
     Type: \tab Package\cr
-    Version: \tab 1.5.1\cr
-    Date: \tab 2019-11-08\cr
+    Version: \tab 1.14.1\cr
+    Date: \tab 2022-08-08\cr
     License: \tab  GPL-2\cr
 }
 \code{\link{predNuCpos}}: R function for prediction of nucleosome 
@@ -43,9 +43,6 @@
 
 \code{\link{localHBA}}: R function for calculation of 
     the local histone binding affinity.
-
-\code{\link{mutNuCpos}}: R function for predicting the effect of 
-    a genetic alteration on nucleosome positioning.
 
 }
 \author{

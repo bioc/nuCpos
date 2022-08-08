@@ -2,12 +2,15 @@ predNuCposInternal <- function(inseq, species = "mm",
             smoothHBA = FALSE, std = FALSE){
     
     message("species: ", species)
-    if(!is(inseq)[1] == "character"){
-        if(is(inseq)[1] == "DNAString"){
+    # if(!is(inseq)[1] == "character"){
+    #     if(is(inseq)[1] == "DNAString"){
+    if(is(inseq, "character")[1] == FALSE){
+        if(is(inseq, 'DNAString')[1] == TRUE){
             if(requireNamespace("Biostrings", quietly = TRUE)){
                 inseq <- as.character(inseq)
-                message(paste("The class of inseq was changed ", 
-                    "from DNAString to character\n", sep = ""))
+                MESSAGE <- paste("The class of inseq was changed ", 
+                    "from DNAString to character\n", sep = "")
+                message(MESSAGE)
             }else{
                 stop("DNAString cannot be changed to a character string")
             }
@@ -61,7 +64,7 @@ predNuCposInternal <- function(inseq, species = "mm",
 
     inseq_num <- as.integer(charToRaw(inseq))
     if(smoothHBA == FALSE){
-        results = .Fortran("nuCpos2_2", inseq_num, inseqlen, freqL, tranL, 
+        results <- .Fortran("nuCpos2_2", inseq_num, inseqlen, freqL, tranL, 
             tranL2, tranL3, tranL4, freqN4, tranN4, maxlen =  as.integer(500), 
             Pd, std = STD, 
             pstart = numeric(length=inseqlen),
@@ -71,7 +74,7 @@ predNuCposInternal <- function(inseq, species = "mm",
             PACKAGE = "nuCpos")[13:16]
     }
     if(smoothHBA == TRUE){
-        results = .Fortran("nuCpos2_1", inseq_num, inseqlen, freqL, tranL, 
+        results <- .Fortran("nuCpos2_1", inseq_num, inseqlen, freqL, tranL, 
             tranL2, tranL3, tranL4, freqN4, tranN4, maxlen =  as.integer(500), 
             Pd, std = STD, 
             pstart = numeric(length=inseqlen),

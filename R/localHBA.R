@@ -1,8 +1,10 @@
 localHBA <- function(inseq, species = "mm", silent = FALSE){
 
     if(silent == FALSE) message("species: ", species, "\n")
-    if(!is(inseq)[1] == "character"){
-        if(is(inseq)[1] == "DNAString"){
+    # if(!is(inseq)[1] == "character"){
+    #     if(is(inseq)[1] == "DNAString"){
+    if(is(inseq, "character")[1] == FALSE){
+        if(is(inseq, 'DNAString')[1] == TRUE){
             if(requireNamespace("Biostrings", quietly = TRUE)){
                 inseq <- as.character(inseq)
                 if(silent == FALSE){
