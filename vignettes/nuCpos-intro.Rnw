@@ -158,7 +158,7 @@ to start at the given position (blue vertical lines) and the
 Viterbi path (red lines) are shown as well as the nucleosome 
 occupancy (gray). 
 
-<<>>=
+<<fig=TRUE>>=
 plotNuPoP(results.TRP1ARS1x1)
 @ 
 
@@ -183,7 +183,7 @@ The central part (from the coordinate 1,466 to 2,930) of the
 prediction results is read by \verb@readNuPoP@. They are apparently 
 different from the previous results near the terminal regions.
 
-<<>>=
+<<fig=TRUE>>=
 par(mfrow = c(2, 1))
 plot(x = 1:1465, y = results.TRP1ARS1x1[,3], type = "n", 
     ylim = c(-0.05, 1), xlab = "Position from the EcoRI site #1", 
@@ -207,7 +207,7 @@ By specifying the argument $\Rfunarg{smoothHBA}$ as TRUE,
 HBA scores can be smoothed in a 55-bp window as being done by 
 the \verb@predNuPoP@ function of \Rpackage{NuPoP}.
 
-<<>>=
+<<fig=TRUE>>=
 predNuCpos(file = system.file("extdata", "TRP1ARS1x3.fasta", 
     package = "nuCpos"), species = "sc", smoothHBA = TRUE, 
     ActLikePredNuPoP = TRUE)
@@ -313,7 +313,7 @@ suggests that subsequence of \Robject{inseq} around SHL -3.5 and
 -2.5 is suitable for nucleosome formation. 
 
 
-<<>>=
+<<fig=TRUE>>=
 localHBA(inseq = inseq, species = "sc")
 barplot(localHBA(inseq = inseq, species = "sc"), 
     names.arg = LETTERS[1:13], xlab = "Nucleosomal subsegments", 
