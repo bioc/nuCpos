@@ -31,8 +31,8 @@
 \tabular{ll}{
     Package: \tab nuCpos\cr
     Type: \tab Package\cr
-    Version: \tab 1.15.2\cr
-    Date: \tab 2022-08-08\cr
+    Version: \tab 1.15.3\cr
+    Date: \tab 2022-08-10\cr
     License: \tab  GPL-2\cr
 }
 \code{\link{predNuCpos}}: R function for prediction of nucleosome 
