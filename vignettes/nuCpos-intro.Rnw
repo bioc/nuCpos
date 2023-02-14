@@ -63,13 +63,8 @@ in their original way.
 
 
 \section{nuCpos functions}
-\Rpackage{nuCpos} has three functions: \verb@predNuCpos@, 
+\Rpackage{nuCpos} has two functions: 
 \verb@HBA@, and \verb@localHBA@. 
-The \verb@predNuCpos@ function provides dHMM-based prediction of 
-nucleosome occupancy. This function is built to demonstrate 
-the usefulness of chemical maps in prediction. Users can obtain 
-unsmoothed HBA scores with this function. Note: \Rpackage{NuPoP} 
-now provides chemical map-based prediction. 
 
 The functions \verb@HBA@ and \verb@localHBA@ receive a sequence of 
 147-bp DNA and calculate whole nucleosomal and local HBA scores. 
@@ -88,184 +83,6 @@ Load the \Rpackage{nuCpos} package as follows:
 
 <<>>=
 library(nuCpos)
-@
-
-
-\section{Performing predictions with predNuCpos}
-The \verb@predNuCpos@ function acts like the \verb@predNuPoP@ 
-function of \Rpackage{NuPoP}. 
-When the $\Rfunarg{ActLikePredNuPoP}$ argument is set as TRUE, 
-\verb@predNuCpos@ reads a DNA 
-sequence file in FASTA format and invokes a Fortran subroutine 
-to perform predictions. The prediction results will be saved 
-in the working directory. \textit{TRP1ARS1x1.fasta}, the DNA 
-sequence of \textit{TRP1ARS1} circular minichromosome (1,465 bp) 
-(\cite{stat:Fuse2017}), in \Robject{extdata} can be used for 
-an example run. Call the \verb@predNuCpos@ function as follows:
-
-<<>>=
-predNuCpos(file = system.file("extdata", "TRP1ARS1x1.fasta", 
-    package = "nuCpos"), species = "sc", smoothHBA = FALSE, 
-    ActLikePredNuPoP = TRUE)
-@ 
-
-The argument $\Rfunarg{file}$ is the path to the fasta file. 
-The argument $\Rfunarg{species}$ can be specified as follows: 
-mm = \textit{M. musculus};  sc = \textit{S. cerevisiae}; 
-sp = \textit{S. pombe}. Re-scaling of the nucleosome and linker 
-models for the prediction of other species' nucleosomes are 
-not supported. \Rpackage{nuCpos} uses 4th order Markov chain 
-models for the prediction. 
-
-The name of the output file will be like 
-\textit{TRP1ARS1x1.fasta\_Prediction4.txt}. 
-As in the output file produced by the parental \Rpackage{NuPoP} 
-package, it will contain five columns: 
-\begin{enumerate}
-    \item{\Robject{Position}: position in the input DNA sequence.}
-    \item{\Robject{P-start}:  probability that a nucleosome starts at.}
-    \item{\Robject{Occup}:    nucleosome occupancy score.}
-    \item{\Robject{N/L}:      Viterbi path (1 and 0 for the 
-        nucleosome and linker states, respectively).}
-    \item{\Robject{Affinity}: histone binding affinity score.} 
-\end{enumerate}
-
-To import the output into R, the \verb@readNuPoP@ function of 
-    \Rpackage{NuPoP} can be used:
-<<>>=
-library(NuPoP)
-results.TRP1ARS1x1 <- readNuPoP("TRP1ARS1x1.fasta_Prediction4.txt", 
-    startPos = 1, endPos = 1465)
-results.TRP1ARS1x1[1:5,]
-@ 
-
-The arguments $\Rfunarg{startPos}$ and $\Rfunarg{endPos}$ are used 
-to import a part of the prediction results. In this example, 
-the prediction results for the whole tested sequence is imported. 
-First and last 73-bp regions do not have HBA scores 
-(\Robject{Affinity}) as they cannot be calculated. 
-The HBA scores start from the 74th position:
-
-<<>>=
-results.TRP1ARS1x1[72:76,]
-@
-
-For visualization of the prediction results, the \verb@plotNuPoP@ 
-function of \Rpackage{NuPoP} can be used. This function draws 
-two plots in the graphical window. The top one shows predicted 
-nucleosome occupancy. In the bottom one, probability of a nucleosome 
-to start at the given position (blue vertical lines) and the 
-Viterbi path (red lines) are shown as well as the nucleosome 
-occupancy (gray). 
-
-<<fig=TRUE>>=
-plotNuPoP(results.TRP1ARS1x1)
-@ 
-
-For prediction of nucleosome positioning in short circular DNA, 
-one can use a triplicated sequence for prediction and read only 
-the central copy for the evaluation. By triplicating the DNA, 
-inaccurate prediction near the DNA ends, which are joined to 
-each other in the circular form, can be avoided.
-
-<<>>=
-predNuCpos(file = system.file("extdata", "TRP1ARS1x3.fasta", 
-    package = "nuCpos"), species = "sc", smoothHBA = FALSE, 
-    ActLikePredNuPoP = TRUE)
-results.TRP1ARS1 <- readNuPoP("TRP1ARS1x3.fasta_Prediction4.txt", 
-    startPos = 1466, endPos = 2930)
-@ 
-
-Here, \Robject{TRP1ARS1x3.fasta} in \Robject{extdata} is a 
-triplicated sequence (4,395 bp) of the \textit{TRP1ARS1} 
-minichromosome (1,465 bp). 
-The central part (from the coordinate 1,466 to 2,930) of the 
-prediction results is read by \verb@readNuPoP@. They are apparently 
-different from the previous results near the terminal regions.
-
-<<fig=TRUE>>=
-par(mfrow = c(2, 1))
-plot(x = 1:1465, y = results.TRP1ARS1x1[,3], type = "n", 
-    ylim = c(-0.05, 1), xlab = "Position from the EcoRI site #1", 
-    ylab = "probability/occupancy")
-title("Not triplicated")
-polygon(c(1, 1:1465, 1465), c(0, results.TRP1ARS1x1[,3], 0), col = 8)
-points(x = 1:1465, y = results.TRP1ARS1x1[,4], type = "l", col = 2)
-points(x = 1:1465, y = results.TRP1ARS1x1[, 2], type = "h", col = 4)
-
-plot(x = 1:1465, y = results.TRP1ARS1[,3], type = "n", 
-    ylim = c(-0.05, 1), xlab = "Position from the EcoRI site #1", 
-    ylab = "probability/occupancy")
-title("Triplicated: central copy")
-polygon(c(1, 1:1465, 1465), c(0, results.TRP1ARS1[,3], 0), col = 8)
-points(x = 1:1465, y = results.TRP1ARS1[,4], type = "l", col = 2)
-points(x = 1:1465, y = results.TRP1ARS1[, 2], type = "h", col = 4)
-@
-
-
-By specifying the argument $\Rfunarg{smoothHBA}$ as TRUE, 
-HBA scores can be smoothed in a 55-bp window as being done by 
-the \verb@predNuPoP@ function of \Rpackage{NuPoP}.
-
-<<fig=TRUE>>=
-predNuCpos(file = system.file("extdata", "TRP1ARS1x3.fasta", 
-    package = "nuCpos"), species = "sc", smoothHBA = TRUE, 
-    ActLikePredNuPoP = TRUE)
-results.TRP1ARS1.smooth <- readNuPoP("TRP1ARS1x3.fasta_Prediction4.txt", 
-    startPos = 1466, endPos = 2930)
-
-par(mfrow = c(2, 1))
-plot(x = 1:1465, y = results.TRP1ARS1[,3], type = "n", 
-    ylim = c(-0.05, 1), xlab = "Position from the EcoRI site #1", 
-    ylab = "probability/occupancy")
-title("Occupancy(grey)/probability(blue)/Viterbi(red)")
-polygon(c(1, 1:1465, 1465), c(0, results.TRP1ARS1[,3], 0), col = 8)
-points(x = 1:1465, y = results.TRP1ARS1[,4], type = "l", col = 2)
-points(x = 1:1465, y = results.TRP1ARS1[, 2], type = "h", col = 4)
-
-plot(x = 1:1465, y = results.TRP1ARS1[,5], type = "n", 
-    xlab = "Position from the EcoRI site #1", 
-    ylab = "HBA", main = "HBA(red)/smoothed HBA(blue)")
-points(x = 1:1465, y = results.TRP1ARS1[,5], type = "l", col = 2)
-points(x = 1:1465, y = results.TRP1ARS1.smooth[,5], type = "l", col = 4)
-@
-
-As shown as a red line in the bottom one of the above plots, 
-non-smoothed HBA scores in eukaryotic sequences exhibit 
-about 10-bp periodicity. The dyads of predicted nucleosomes usually 
-locate at the coordinates with high HBA scores. HBA scores in 
-the output of \verb@predNuCpos@ can be standardized as being done 
-by the \verb@predNuPoP@ function of \Rpackage{NuPoP} by specifying 
-the argument $\Rfunarg{std}$ of \verb@predNuCpos@ as TRUE. 
-The default setting for $\Rfunarg{std}$ is FALSE.
-
-When the argument $\Rfunarg{ActLikePredNuPoP}$ is set as FALSE, 
-which is the default setting, 
-\verb@predNuCpos@ receives a character string or DNAString object 
-as $\Rfunarg{inseq}$. 
-In this case, prediction results will be returned to the 
-R environment, and no file will be generated in the working directory.
-The input sequence ($\Rfunarg{inseq}$) must not contain characters 
-other than A/C/G/T. 
-
-The results will contain five columns: 
-\begin{enumerate}
-    \item{\Robject{pos}: position in the input DNA sequence.}
-    \item{\Robject{pstart}:  probability that a nucleosome starts at.}
-    \item{\Robject{nucoccup}:    nucleosome occupancy score.}
-    \item{\Robject{viterbi}:      Viterbi path (1 and 0 for the 
-        nucleosome and linker states, respectively).}
-    \item{\Robject{affinity}: histone binding affinity score.} 
-\end{enumerate}
-
-<<>>=
-TRP1ARS1 <- paste(scan(file = 
-    system.file("extdata", "TRP1ARS1x1.fasta", package = "nuCpos"), 
-    what = character(), skip = 1), sep = "", collapse = "")
-results.TRP1ARS1.internal <- 
-    predNuCpos(inseq = TRP1ARS1, species = "sc", smoothHBA = FALSE, 
-    ActLikePredNuPoP = FALSE)
-results.TRP1ARS1.internal[72:76,]
 @
 
 
@@ -313,7 +130,7 @@ suggests that subsequence of \Robject{inseq} around SHL -3.5 and
 -2.5 is suitable for nucleosome formation. 
 
 
-<<fig=TRUE>>=
+<<>>=
 localHBA(inseq = inseq, species = "sc")
 barplot(localHBA(inseq = inseq, species = "sc"), 
     names.arg = LETTERS[1:13], xlab = "Nucleosomal subsegments", 
@@ -331,7 +148,8 @@ In this package, their excellent code for dHMM-based prediction
 was adapted for chemical map-based prediction to demonstrate 
 the usefulness of chemical maps in prediction. 
 As we noticed that canceling of HBA smoothing helps predicting 
-rotational settings, predNuCpos provides this option. 
+rotational settings, predNuCpos in the earlier version 
+provided this option. 
 However, for those who want to predict nucleosome occupancy in 
 the original way with chemical maps, we encourage users to 
 use NuPoP functions as it now provides 

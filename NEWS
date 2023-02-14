@@ -58,7 +58,12 @@ bug fix
 ver. 1.15.3/2022-08-10
 bug fix
 
-
+**************************************************
+*              1.17 SERIES NEWS                   *
+**************************************************
+ver. 1.17.1/2023-02-14
+predNuCpos was removed as a similar function is 
+available in NuPoP. 
 
 
 
