@@ -8,16 +8,8 @@
 \description{
     \pkg{nuCpos}, a derivative of \pkg{NuPoP}, 
     is an R package for prediction of nucleosome positions. 
-    In \pkg{nuCpos}, a duration hidden Markov model is 
-    trained with a chemical map of nucleosomes either 
-    from budding yeast (Brogaard et al. (2012)), 
-    fission yeast (Moyle-Heyrman et al. (2012)), 
-    or mouse embryonic stem cells (Voong et al. (2016)). 
-    \pkg{nuCpos} outputs the Viterbi (most probable) path 
-    of nucleosome-linker states, predicted nucleosome 
-    occupancy scores and histone binding affinity (HBA) 
-    scores as \pkg{NuPoP} does. \pkg{nuCpos} can also 
-    calculate local and whole nucleosomal HBA scores for 
+    \pkg{nuCpos} calculates local and whole nucleosomal 
+    histone binding affinity (HBA) scores for 
     a given 147-bp sequence. Note: This package was 
     designed to demonstrate the use of chemical maps in 
     prediction. As the parental package \pkg{NuPoP} now 
@@ -25,13 +17,18 @@
     strongly encouraged to use it for dHMM-based 
     prediction. Please refer to Xi et al. (2010) and 
     Wang et al. (2008) for technical details of 
-    \pkg{NuPoP}. 
+    \pkg{NuPoP}. nuCpos continues to provide functions 
+    for HBA calculation. The models are based on 
+    chemical maps of nucleosomes from 
+    budding yeast (Brogaard et al. (2012)), 
+    fission yeast (Moyle-Heyrman et al. (2012)), 
+    or mouse embryonic stem cells (Voong et al. (2016)). 
 }
 \details{
 \tabular{ll}{
     Package: \tab nuCpos\cr
     Type: \tab Package\cr
-    Version: \tab 1.17.1\cr
+    Version: \tab 1.17.2\cr
     Date: \tab 2023-02-14\cr
     License: \tab  GPL-2\cr
 }
