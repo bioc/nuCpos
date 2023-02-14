@@ -31,12 +31,10 @@
 \tabular{ll}{
     Package: \tab nuCpos\cr
     Type: \tab Package\cr
-    Version: \tab 1.15.3\cr
-    Date: \tab 2022-08-10\cr
+    Version: \tab 1.17.1\cr
+    Date: \tab 2023-02-14\cr
     License: \tab  GPL-2\cr
 }
-\code{\link{predNuCpos}}: R function for prediction of nucleosome 
-    positioning, nucleosome occupancy and HBA scores.
 
 \code{\link{HBA}}: R function for calculation of the histone 
     binding affinity score of a whole nucleosome.
@@ -99,9 +97,7 @@
 }
 
 \examples{
-    predNuCpos(file = system.file("extdata", "TRP1ARS1x1.fasta", 
-        package = "nuCpos"), species = "sc", 
-        ActLikePredNuPoP = TRUE)
-
-## The prediction results are stored in the working directory.
+load(system.file("extdata","inseq.RData",package="nuCpos"))
+HBA(inseq, species = "sc")
+localHBA(inseq, species = "sc")
 }
