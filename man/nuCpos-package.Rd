@@ -13,9 +13,9 @@
     a given 147-bp sequence. Note: This package was 
     designed to demonstrate the use of chemical maps in 
     prediction. As the parental package \pkg{NuPoP} now 
-    provide chemical-map-based prediction, users are 
-    strongly encouraged to use it for dHMM-based 
-    prediction. Please refer to Xi et al. (2010) and 
+    provides chemical-map-based prediction, 
+    the function for dHMM-based prediction was removed 
+    from this package. Please refer to Xi et al. (2010) and 
     Wang et al. (2008) for technical details of 
     \pkg{NuPoP}. nuCpos continues to provide functions 
     for HBA calculation. The models are based on 
@@ -28,8 +28,8 @@
 \tabular{ll}{
     Package: \tab nuCpos\cr
     Type: \tab Package\cr
-    Version: \tab 1.17.2\cr
-    Date: \tab 2023-02-14\cr
+    Version: \tab 1.17.3\cr
+    Date: \tab 2023-02-15\cr
     License: \tab  GPL-2\cr
 }
 

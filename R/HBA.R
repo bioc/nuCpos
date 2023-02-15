@@ -1,4 +1,4 @@
-HBA <- function(inseq, species = "mm", silent = FALSE){
+HBA  <- function(inseq, species = "mm", silent = FALSE){
 
     if(silent == FALSE) message("species: ", species, "\n")
     # if(!is(inseq)[1] == "character"){
@@ -26,49 +26,44 @@ HBA <- function(inseq, species = "mm", silent = FALSE){
         out <- NA; names(out) <- "HBA"; return(out)
     }
 
-    if(species == "sc"){
-        freqL1 <- nature11142_s2.147.freqL
-        tranL1 <- nature11142_s2.147.tranL
-        TtranL2 <- nature11142_s2.147.tranL2
-        TtranL3 <- nature11142_s2.147.tranL3
-        TtranL4 <- nature11142_s2.147.tranL4
-        TfreqN4 <- nature11142_s2.147.freqN4SA
-        TtranN4 <- nature11142_s2.147.tranN4_SMA
-    }
-    if(species == "sp"){
-        freqL1 <- sd01.147.freqL
-        tranL1 <- sd01.147.tranL
-        TtranL2 <- sd01.147.tranL2
-        TtranL3 <- sd01.147.tranL3
-        TtranL4 <- sd01.147.tranL4
-        TfreqN4 <- sd01.147.freqN4SA
-        TtranN4 <- sd01.147.tranN4_SMA
-    }
-    if(species == "mm"){            
-        freqL1 <- chem.mm9.freqL
-        tranL1 <- chem.mm9.tranL
-        TtranL2 <- chem.mm9.tranL2
-        TtranL3 <- chem.mm9.tranL3
-        TtranL4 <- chem.mm9.tranL4
-        TfreqN4 <- chem.mm9.freqN4SA
-        TtranN4 <- chem.mm9.tranN4_SMA
-    }
-    inseq_num <- as.integer(charToRaw(inseq))
-    outlist <- .Fortran("HBA_3", 
-            inseq_num = inseq_num,
-            logasc = numeric(length=1), freqL1 = freqL1, 
-            tranL1 = tranL1, TtranL2 = TtranL2, TtranL3 = TtranL3, 
-            TtranL4 = TtranL4, TfreqN4 = TfreqN4, 
-            TtranN4 = TtranN4, PACKAGE = "nuCpos")[2]
+    if(species == "sc") profiles <- nature11142_s2.147.HBA.prof
+    if(species == "sp") profiles <- sd01.147.HBA.prof
+    if(species == "mm") profiles <- chem.mm9.HBA.prof
+    freqN4 <- profiles$freqN4
+    freqL4 <- profiles$freqL4
+    tranN4 <- profiles$tranN4
+    tranL4 <- profiles$tranL4
 
-    # N を含んでいるときはすべてを NA にする。
-    if(outlist[[1]] == 0){
-        # outlist[seq_len(13)] <- as.numeric(NA)    ## 13 を 1 にする！！！！ (20180129)
-        outlist[1] <- as.numeric(NA)    
+    inseqW <- strsplit(inseq, split = "")[[1]]
+    inseqW[inseqW == "A"] <- 1
+    inseqW[inseqW == "C"] <- 2
+    inseqW[inseqW == "G"] <- 3
+    inseqW[inseqW == "T"] <- 4
+    w <- as.integer(inseqW)
+
+    inseqRC <- as.character(Biostrings::reverseComplement(Biostrings::DNAString(inseq)))
+    inseqC <- strsplit(inseqRC, split = "")[[1]]
+    inseqC[inseqC == "A"] <- 1
+    inseqC[inseqC == "C"] <- 2
+    inseqC[inseqC == "G"] <- 3
+    inseqC[inseqC == "T"] <- 4
+    c <- as.integer(inseqC)
+
+    t <- 74
+    z <- 147
+    asc <- freqN4[w[t-73], w[t-72], w[t-71], w[t-70]] /
+            freqL4[w[t-73], w[t-72], w[t-71], w[t-70]] *
+            freqN4[c[z-t-72], c[z-t-71], c[z-t-70], c[z-t-69]] /
+            freqL4[c[z-t-72], c[z-t-71], c[z-t-70], c[z-t-69]]
+    for(i in 5:147){
+        asc <- asc * 
+                tranN4[i, w[t-78+i], w[t-77+i], w[t-76+i], w[t-75+i], w[t-74+i]] /
+                tranL4[w[t-78+i], w[t-77+i], w[t-76+i], w[t-75+i], w[t-74+i]] *
+                tranN4[i, c[z-t-77+i], c[z-t-76+i], c[z-t-75+i], c[z-t-74+i], c[z-t-73+i]] /
+                tranL4[c[z-t-77+i], c[z-t-76+i], c[z-t-75+i], c[z-t-74+i], c[z-t-73+i]]
     }
-    out <- unlist(outlist)
-    names(out) <- "HBA"
-    return(out)
+    logasc <- log(asc)
+    names(logasc) <- "HBA"
+    return(logasc)
+
 }
-
-

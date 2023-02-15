@@ -6,7 +6,7 @@
     affinity score of a given 147-bp sequence.
 }
 \description{
-    This function invokes a Fortran subroutine to calculate 
+    This function calculates 
     histone binding score. Nucleosomal and linker models 
     built upon the chemical maps are used for the calculation.}
 \usage{HBA(inseq, species = "mm", silent = FALSE)}

@@ -31,19 +31,22 @@
 
 \Rpackage{nuCpos}, a derivative of \Rpackage{NuPoP}, 
 is an R package for predicting \textbf{\textit{nuc}}leosome 
-\textbf{\textit{pos}}itions. In \Rpackage{nuCpos}, 
-a duration hidden Markov model is trained with a 
-\textbf{\textit{C}}hemical map of nucleosomes either from 
+\textbf{\textit{pos}}itions. 
+\Rpackage{nuCpos} calculates local and whole nucleosomal HBA 
+scores for a given 147-bp sequence. 
+This package was designed to demonstrate the use of 
+chemical maps in prediction. 
+As the parental package \Rpackage{NuPoP} now provides 
+chemical-map-based prediction, the function for 
+dHMM-based prediction was removed from this package. 
+\Rpackage{nuCpos} continues to provide functiojns for HBA 
+calculation. The models are based on chemical maps of 
+nucleosomes from 
 budding yeast \textit{Saccharomyces cerevisiae} 
 (\cite{stat:Brogaard2012}), fission yeast 
 \textit{Schizosaccharomyces pombe} (\cite{stat:Moyle-Heyrman2013}), 
 or embryonic stem cells of house mouse \textit{Mus musculus} 
-(\cite{stat:Voong2016}). \Rpackage{nuCpos} outputs the Viterbi 
-(most probable) path of nucleosome-linker states, 
-predicted nucleosome occupancy scores and histone binding affinity 
-(HBA) scores as \Rpackage{NuPoP} does. \Rpackage{nuCpos} can also 
-calculate local and whole nucleosomal HBA scores for 
-a given 147-bp sequence. 
+(\cite{stat:Voong2016}). 
 
 The parental package \Rpackage{NuPoP}, licensed under GPL-2, 
 was developed by Ji-Ping Wang and Liqun Xi. Please refer to 
@@ -51,9 +54,8 @@ was developed by Ji-Ping Wang and Liqun Xi. Please refer to
 technical details of \Rpackage{NuPoP}. Their excellent codes 
 were adapted in \Rpackage{nuCpos} to demonstrate the usefulness 
 of chemical maps in prediction. 
-In dHMM-based predicton, 
-users of \Rpackage{nuCpos} can choose whether HBA scores will be 
-smoothed or not in the output. Note that when 
+
+Note that when 
 \Rpackage{nuCpos} was released, \Rpackage{NuPoP} only used an 
 MNase-seq-based map of budding yeast nucleosomes to train 
 a duration hidden Markov model. However, as \Rpackage{NuPoP} now 
@@ -156,7 +158,9 @@ use NuPoP functions as it now provides
 chemical map-based predictions. 
 In our functions HBA and localHBA, their excellent code was 
 also adapted to calculate the scores of given 147-bp sequences 
-independently of the genomic context.
+independently of the genomic context. 
+The function HBA now runs without invoking a fortran subroutine.
+
 
 \bibliographystyle{apalike}
 %\bibliography{nuCposBib.bib}

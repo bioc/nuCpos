@@ -68,6 +68,8 @@ available in NuPoP.
 ver. 1.17.2/2023-02-14
 bug fix
 
-
+ver. 1.17.3/2023-02-15
+HBA was replaced with a new version, which does 
+not invoke a fortran subroutine.
 
 
