@@ -1,4 +1,3 @@
-useDynLib(nuCpos)
 export(HBA, localHBA)
 importFrom("graphics", "axis", "par", "plot", "polygon", "rect", "title")
 importFrom("methods", "is")

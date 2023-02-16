@@ -72,4 +72,8 @@ ver. 1.17.3/2023-02-15
 HBA was replaced with a new version, which does 
 not invoke a fortran subroutine.
 
+ver. 1.17.4/2023-02-16
+localHBA was replaced with a new version, 
+which does not invoke a fortran subroutine.
+
 

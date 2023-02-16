@@ -6,8 +6,9 @@
     of a given 147-bp sequence.
 }
 \description{
-    This function invokes a Fortran subroutine to calculate 
-    local histone binding score. Nucleosomal and linker 
+    This function calculates local histone binding scores 
+    for 13 nucleosomal subsegments. 
+    Nucleosomal and linker 
     models built upon the chemical maps are used for the 
     calculation.}
 \usage{localHBA(inseq, species = "mm", silent = FALSE)}

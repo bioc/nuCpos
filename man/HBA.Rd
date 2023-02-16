@@ -7,7 +7,8 @@
 }
 \description{
     This function calculates 
-    histone binding score. Nucleosomal and linker models 
+    the histone binding score for a given 147-bp sequence. 
+    Nucleosomal and linker models 
     built upon the chemical maps are used for the calculation.}
 \usage{HBA(inseq, species = "mm", silent = FALSE)}
 
